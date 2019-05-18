@@ -1,0 +1,208 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 -- phpMyAdmin SQL Dump\
+-- version 4.7.3\
+-- https://www.phpmyadmin.net/\
+--\
+-- Host: localhost:8889\
+-- Generation Time: May 18, 2019 at 08:30 PM\
+-- Server version: 5.6.35\
+-- PHP Version: 7.1.8\
+\
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";\
+SET time_zone = "+00:00";\
+\
+--\
+-- Database: `mysql_database`\
+--\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `CommDB`\
+--\
+\
+CREATE TABLE `CommDB` (\
+  `id` int(3) NOT NULL,\
+  `taskid` int(3) NOT NULL,\
+  `text` text\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `CommDB`\
+--\
+\
+INSERT INTO `CommDB` (`id`, `taskid`, `text`) VALUES\
+(1, 52, 'Employee uploaded the task file:'),\
+(2, 52, 'Employee uploaded the task file:'),\
+(3, 52, 'Employee uploaded the task file:(WEB-INF)'),\
+(4, 52, 'Employee uploaded the task file:'),\
+(5, 52, 'Employee uploaded the task file:(WEB-INF)'),\
+(6, 52, 'Employee uploaded the task file:(WEB-INF)'),\
+(7, 51, 'Employee uploaded the task file:(WEB-INF)'),\
+(8, 52, 'Employee Wrote:(sfgsdfg\\r\\n)'),\
+(9, 52, 'Employee Wrote:sfgsdfg\\r\\n'),\
+(10, 56, 'Employee Wrote:xfbbxfbc'),\
+(11, 52, 'Employee Wrote:bdfgdfg'),\
+(12, 67, 'Employee Wrote:jhgvjhvjhvhj\\r\\n\\r\\n'),\
+(13, 67, 'Employer Wrote:sdfds\\r\\n'),\
+(14, 52, 'Employee Wrote:vhjbjhb'),\
+(15, 55, 'Employee Wrote:bcxvbcvb'),\
+(16, 55, 'Employee Wrote:dxvxcvxc'),\
+(17, 52, 'Employee Wrote:sdfsdf'),\
+(18, 52, 'Employee Wrote:vhvjh'),\
+(19, 55, 'Employee Wrote:xvxcvxc'),\
+(20, 55, 'Employee Wrote:sfdf'),\
+(21, 55, 'Employee Wrote:fsdfsd'),\
+(22, 67, 'Employee Wrote:Hi bitch'),\
+(23, 67, 'Employer Wrote:Whats up retard'),\
+(24, 63, 'Employee Wrote:hELLO NIGGa\\r\\n'),\
+(25, 63, 'Employer Wrote:hi bitcch');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `TaskDB`\
+--\
+\
+CREATE TABLE `TaskDB` (\
+  `id` int(3) NOT NULL,\
+  `email` varchar(255) DEFAULT NULL,\
+  `skillneed` varchar(255) DEFAULT NULL,\
+  `payment` varchar(255) DEFAULT NULL,\
+  `description` text,\
+  `remote` tinyint(1) NOT NULL,\
+  `active` tinyint(1) NOT NULL DEFAULT '0',\
+  `done` tinyint(1) NOT NULL DEFAULT '0',\
+  `assignedto` varchar(255) DEFAULT NULL,\
+  `candidates` text,\
+  `feedback` text,\
+  `feedbacked` tinyint(1) NOT NULL DEFAULT '0',\
+  `feedbackedbyemployer` tinyint(1) NOT NULL DEFAULT '0'\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `TaskDB`\
+--\
+\
+INSERT INTO `TaskDB` (`id`, `email`, `skillneed`, `payment`, `description`, `remote`, `active`, `done`, `assignedto`, `candidates`, `feedback`, `feedbacked`, `feedbackedbyemployer`) VALUES\
+(48, 'hnaf', 'Plumber', '80', 'Need plumber for a house job asap', 0, 1, 1, 'thanos@mail.com', 'hnaf%test1%hnaf%test2%', 'Employer gave feedback:hhbhjb\\nEmployee gave feedback:fsdfsd\\nEmployer gave feedback:fsadff\\nEmployer gave feedback:hjkbjkjbkj\\nEmployer gave feedback:njknkj\\nEmployee gave feedback:nkjnbkj\\n', 1, 1),\
+(50, 'hnaf', 'Electrician', '50', 'Need to fix an electronic device(ps console circuit board faulty) I will mail it when you send your address if I accept your application for this task.', 1, 1, 1, 'test', 'test20%test1%test%test2%', 'Employer gave feedback:hjjjkhkhkj\\nEmployer gave feedback:jbbjk\\n', 0, 1),\
+(51, 'hnaf', 'Electrician', '100', 'Need help installing a kitchen.', 1, 1, 1, 'thanos@mail.com', 'ssdfhnaf%thanos@mail.com%', 'Employer gave feedback:bjbjh\\nEmployee gave feedback:njknkj\\n', 1, 0),\
+(52, 'null', 'plumber', '100', 'nnn', 1, 1, 0, 'hnaf', NULL, NULL, 0, 0),\
+(53, 'null', 'electrician', '122', 'jnkjn', 0, 0, 0, 'null', 'hnaf%hnaf%hnaf%hnaf%', NULL, 0, 0),\
+(54, 'null', 'plumber', 'bhjbj', 'bbhj', 0, 0, 0, 'null', 'hnaf%thanos@mail.com%thanos@mail.com%thanos@mail.com%', NULL, 0, 0),\
+(55, 'hnafpaktitis@gmail.com', 'njk', 'njkn', 'njkn', 1, 1, 0, 'hnaf', 'hnaf%', NULL, 0, 0),\
+(56, 'hnafpaktitis@gmail.com', 'electrician', '110', 'nnkjnkj', 0, 1, 0, 'hnaf', 'hnaf%', NULL, 0, 0),\
+(57, 'hnaf', 'construction worker', '200', 'Need a worker for a broken sidewalk fix.', 0, 1, 0, 'test45', 'test45%test41%test67%test2%', NULL, 0, 0),\
+(58, 'hnaf@fuckthis.com', 'everything', '1', '', 0, 0, 0, NULL, 'hnaf@fuckthis.com%hnaf@fuckthis.com%', NULL, 0, 0),\
+(59, 'hnaf', 'NEED A THANOS', '1 SOUL STONE ', 'NEED THANOS ASAP', 0, 1, 1, 'thanos@mail.com', 'thanos@mail.com%', 'Employer gave feedback:jhkjhjkhkj\\n', 0, 1),\
+(60, 'thanos@mail.com', 'plumber', '800', 'need one', 0, 1, 1, 'hnaf', 'hnaf%', 'Employee gave feedback:sdvsdsdvEmployer gave feedback:Nice guy 10/10Employee gave feedback:i am employee\\nEmployer gave feedback:i am thanos employer\\nEmployer gave feedback:hjkhjk\\nEmployee gave feedback:JBJKBJK\\nEmployee gave feedback:fsdfsdf\\nEmployer gave feedback:hjknjk\\nEmployee gave feedback:sfdfsad\\r\\n\\nEmployee gave feedback:hkjhjkhk\\n', 1, 0),\
+(61, 'hnaf', 'lknk', 'hjkhjk', 'jkjkh', 0, 1, 1, 'thanos@mail.com', 'thanos@mail.com%', 'Employer gave feedback:bjhbhj\\nEmployer gave feedback:jbjkbjk\\nEmployee gave feedback:bjnkjn\\n', 1, 1),\
+(62, 'thanos@mail.com', 'hanost', 'njknk', 'njknkj', 0, 1, 1, 'hnaf', 'hnaf%', 'Employee gave feedback:I am employee\\nEmployer gave feedback:I am thanos the employer\\nEmployee gave feedback:bjkbjk\\nEmployer gave feedback:jkjjhnkkj\\nEmployee gave feedback:jhjjk\\nEmployer gave feedback:nkjnknkkjn\\nEmployee gave feedback:bjbj\\nEmployee gave feedback:njknkj\\nEmployee gave feedback:nknkl\\n', 1, 0),\
+(63, 'hnaf', 'nhjkhnjk', 'hjkhkj', 'njkhjk', 0, 1, 0, 'thanos@mail.com', 'thanos@mail.com%', NULL, 0, 0),\
+(64, 'thanos@mail.com', 'jk', 'hkjhkj', 'hjkhkj', 0, 1, 1, 'hnaf', 'hnaf%', 'Employee gave feedback:I am employee\\nEmployer gave feedback:I am employer\\n', 1, 1),\
+(65, 'thanos@mail.com', 'jk', 'hkjhkj', 'hjkhkj', 0, 0, 0, NULL, NULL, NULL, 0, 0),\
+(66, 'hnaf', 'nbkjbnkj', 'bjkbkjbjk', 'bbjkk', 0, 0, 0, NULL, NULL, NULL, 0, 0),\
+(67, 'hnaf', 'remotetest', '400', 'remote', 1, 1, 0, 'thanos@mail.com', 'null%null%thanos@mail.com%', NULL, 0, 0),\
+(68, 'hnaf', 'notremotetest', '400', 'remote', 0, 0, 0, NULL, NULL, NULL, 0, 0),\
+(69, 'hnaf', 'electrician', '30', 'bhjbhjbjh', 1, 0, 0, NULL, NULL, NULL, 0, 0),\
+(70, 'hnaf', 'electrician', '30', 'bhjbhjbjh', 0, 0, 0, NULL, NULL, NULL, 0, 0),\
+(71, 'hnaf', 'plumber', '32', 'bhjbhj', 0, 0, 0, NULL, NULL, NULL, 0, 0),\
+(72, 'hnaf', 'construction worker', '85', 'bjbjh', 0, 0, 0, NULL, NULL, NULL, 0, 0),\
+(73, 'hnaf', 'construction worker', '85', 'bjbjh', 1, 0, 0, NULL, NULL, NULL, 0, 0),\
+(74, 'hnaf', 'construction worker', '85', 'bjbjh', 0, 0, 0, NULL, NULL, NULL, 0, 0),\
+(75, 'null', 'electrician', '30', 'hoihoi', 0, 0, 0, NULL, NULL, NULL, 0, 0),\
+(76, 'null', 'electrician', '33', 'hoihoi', 1, 0, 0, NULL, NULL, NULL, 0, 0);\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `UserDB`\
+--\
+\
+CREATE TABLE `UserDB` (\
+  `id` int(3) NOT NULL,\
+  `email` varchar(255) DEFAULT NULL,\
+  `pass` varchar(255) DEFAULT NULL,\
+  `nick` varchar(255) DEFAULT NULL,\
+  `dot` varchar(255) DEFAULT NULL,\
+  `country` varchar(255) DEFAULT NULL,\
+  `skill` varchar(255) DEFAULT NULL,\
+  `rating` int(2) DEFAULT '0',\
+  `avgrating` double DEFAULT NULL,\
+  `ratingscount` int(11) DEFAULT '0'\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `UserDB`\
+--\
+\
+INSERT INTO `UserDB` (`id`, `email`, `pass`, `nick`, `dot`, `country`, `skill`, `rating`, `avgrating`, `ratingscount`) VALUES\
+(1, 'hnaf', 'lineage2', 'harrynaf', '20/07/1995', 'Greece', 'Computers,Website engineer,Website designer', 78, 4, 18),\
+(2, 'bjhb', 'dasda', 'bhjbhj', 'bhjbjh', 'bhjbjh', 'bhjbjh', 0, 0, 0),\
+(3, 'hjk', 'hjkh', 'hjkh', 'hjkh', 'jkhkjh', 'hkjhk', 0, 0, 0),\
+(4, 'hnafpaktitis@gmail.com', 'trouble', 'hARRYS', '20/07/1995', 'gREECE', 'COMPUTERS,ENGINEERING', 0, 0, 0),\
+(6, 'hnaf@fuckthis.com', 'fuck', 'fucker95', 'fu/ck/youu', 'Here', 'Everything', 0, 0, 0),\
+(7, 'njk', 'njknkj', 'njknkj', 'nkjnkjn', 'nkjnkj', 'njknkjnk', 0, 0, 0),\
+(8, 'njk', 'njknkj', 'njknkj', 'nkjnkjn', 'nkjnkj', 'njknkjnk', 0, 0, 0),\
+(9, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0),\
+(10, 'mnkln', 'nkjnkj', 'njkn', 'kjnknk', 'nknk', 'nknknk,nijnjk', 0, 0, 0),\
+(11, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0),\
+(12, '123', '123', 'bhjbhjb', 'hbhjbhj', 'bhjbjhb', 'bjhbjhbhj,hbhbhjbjh,computers', 0, 0, 0),\
+(13, 'test1', 'test1', 'test1', '20/07/1995', 'Zimbabue', 'electrician,plumber', 4, 0, 0),\
+(14, 'test2', 'test2', 'test2', '20/07/1995', 'Uruguay', 'electrician,plumber', 2, 0, 0),\
+(15, 'test20', 'test20', 'test20', '20/07/1995', 'Spain', 'electrician,plumber', 6, 0, 0),\
+(16, 'test45', 'test45', 'test45', '20/07/1995', 'Scotland', 'electrician,plumber', 3, 0, 0),\
+(17, 'test61', 'test61', 'test61', '20/07/1995', 'UK', 'electrician,plumber', 8, 0, 0),\
+(18, 'test67', 'test67', 'test67', '20/07/1995', 'Wales', 'electrician,plumber', 9, 0, 0),\
+(19, 'test', 'test', 'Thanos', '13/02/1854', 'Titan', 'electrician,plumber,Infinity stone\\'s handler', 19, 19, 1),\
+(20, 'thanos@mail.com', 'thanos', 'Thanos', '08/08/2354 BC.', 'Titan', 'finger snapping,infinity stones worthy,universe population controller,electrician,plumber,construction worker', 115, 6, 18),\
+(21, '1234', '1234', 'njknjk', 'njknjk', 'njknjk', 'njknjk', 0, 0, 0);\
+\
+--\
+-- Indexes for dumped tables\
+--\
+\
+--\
+-- Indexes for table `CommDB`\
+--\
+ALTER TABLE `CommDB`\
+  ADD PRIMARY KEY (`id`);\
+\
+--\
+-- Indexes for table `TaskDB`\
+--\
+ALTER TABLE `TaskDB`\
+  ADD PRIMARY KEY (`id`);\
+\
+--\
+-- Indexes for table `UserDB`\
+--\
+ALTER TABLE `UserDB`\
+  ADD PRIMARY KEY (`id`);\
+\
+--\
+-- AUTO_INCREMENT for dumped tables\
+--\
+\
+--\
+-- AUTO_INCREMENT for table `CommDB`\
+--\
+ALTER TABLE `CommDB`\
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;\
+--\
+-- AUTO_INCREMENT for table `TaskDB`\
+--\
+ALTER TABLE `TaskDB`\
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;\
+--\
+-- AUTO_INCREMENT for table `UserDB`\
+--\
+ALTER TABLE `UserDB`\
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;}
