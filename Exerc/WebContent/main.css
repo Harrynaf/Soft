@@ -1,0 +1,106 @@
+head title{
+    background-color: lightskyblue;
+}
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(67,67,238,1) 35%, rgba(0,212,255,1) 100%);
+    text-align: center;
+}
+h1 {
+  color: navy;
+  margin-left: 20px;
+}
+footer {
+    position:absolute;
+    bottom:0;
+    width:100%;;
+    height:30px;   /* Height of the footer */
+    background-color: 04C4FE;
+    z-index:999; 
+}
+#container{
+    height:80%;
+    position:center;
+    float:center;
+    background-color: skyblue;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+    background-image: url('image1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+#center{
+    padding-top: 25%;
+}
+#center a{
+    text-decoration: none;
+    color:white;
+    background-color: blue;
+    font-size:80px; 
+    margin-right: 5%;
+    margin-left: 5%;
+    padding-top: 3%;
+    padding-right: 3%;
+    padding-bottom: 3%;
+    padding-left: 3%;
+    
+}
+#lower{
+    padding-top: 8%;
+}
+#lower a{
+    text-decoration: none;
+    color:white;
+    background-color: blue;
+    font-size:80px; 
+    padding-top: 3%;
+    padding-right: 3%;
+    padding-bottom: 3%;
+    padding-left: 3%;
+}
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  cursor: pointer;
+}
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  cursor: pointer;
+}
