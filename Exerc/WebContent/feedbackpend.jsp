@@ -5,7 +5,6 @@
 
 <%
 
-    String id = request.getParameter("userId");
 	String driverName = "com.mysql.jdbc.Driver";
 	String connectionUrl = "jdbc:mysql://localhost:8889/";
 	String dbName = "mysql_database";
@@ -77,6 +76,44 @@
 			<td><%=resultSet.getString("assignedto") %></td>
 			<td><%=resultSet.getString("skillneed") %></td>
 			<td><%=resultSet.getString("payment") %></td>
+			<td><%=resultSet.getString("description") %></td>
+			<td><button type="submit" class="registerbtn">Create</button></td>
+		</tr>
+		</tbody>
+		
+		            
+	<%		
+		}
+		String sql1 ="SELECT * FROM TaskDB where done = 1 and feedbacked1 = 0 and assignedto1='"+session.getAttribute("Name")+"' ";
+		resultSet = statement.executeQuery(sql1);
+		while(resultSet.next()){
+	%>             
+		    <tbody>
+		    <tr bgcolor="#cce6ff">
+		    <td><%=resultSet.getString("id") %></td>
+			<td><%=resultSet.getString("email") %></td>
+			<td><%=resultSet.getString("assignedto1") %></td>
+			<td><%=resultSet.getString("skillneed1") %></td>
+			<td><%=resultSet.getString("payment1") %></td>
+			<td><%=resultSet.getString("description") %></td>
+			<td><button type="submit" class="registerbtn">Create</button></td>
+		</tr>
+		</tbody>
+		
+		            
+	<%		
+		}
+		String sql2 ="SELECT * FROM TaskDB where done = 1 and feedbacked2 = 0 and assignedto2='"+session.getAttribute("Name")+"' ";
+		resultSet = statement.executeQuery(sql2);
+		while(resultSet.next()){
+	%>             
+		    <tbody>
+		    <tr bgcolor="#cce6ff">
+		    <td><%=resultSet.getString("id") %></td>
+			<td><%=resultSet.getString("email") %></td>
+			<td><%=resultSet.getString("assignedto2") %></td>
+			<td><%=resultSet.getString("skillneed2") %></td>
+			<td><%=resultSet.getString("payment2") %></td>
 			<td><%=resultSet.getString("description") %></td>
 			<td><button type="submit" class="registerbtn">Create</button></td>
 		</tr>

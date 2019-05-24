@@ -10,7 +10,21 @@
 <h1 style="color:white;">Multi-Assignment</h1>
 <body>
     <div class="container">
-  <form action="/action_page.php">
+   <form action="multidetails.jsp">
+  <input type = "hidden" name="email" id="email">
+  <input type = "hidden" name="remote" id="remote">
+  <input type = "hidden" name="multtype" id="multtype">
+  <input type = "hidden" name="skillneed" id="skillneed">
+  <input type = "hidden" name="skillneed1" id="skillneed1">
+  <input type = "hidden" name="skillneed2" id="skillneed2">
+  <script> 
+  document.getElementById("email").value = "<%=session.getAttribute("Name")%>";
+  document.getElementById("remote").value = true;
+  document.getElementById("multtype").value = 3;
+  document.getElementById("skillneed").value = "Website engineer";
+  document.getElementById("skillneed1").value = "Website designer";
+  document.getElementById("skillneed2").value = "Translator";
+			        </script> 
   <div class="row">
     <div class="col-25">
       <label for="fname">Skill needed</label>
@@ -22,7 +36,7 @@
       <label for="fname">Payment</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="firstname" placeholder="in euro">
+      <input type="text" id="payment" name="payment" placeholder="in euro">
     </div>
   </div>
   <div class="row">
@@ -36,15 +50,29 @@
       <label for="fname">Payment</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="firstname" placeholder="in euro">
+      <input type="text" id="payment1" name="payment1" placeholder="in euro">
     </div>
   </div>   
+  <div class="row">
+    <div class="col-25">
+      <label for="fname">Skill needed</label>
+    </div>
+     <h1><a style="text-align: left;font-size:25px;">Translator</a></h1>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="fname">Payment</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="payment2" name="payment2" placeholder="in euro">
+    </div>
+  </div>  
   <div class="row">
     <div class="col-25">
       <label for="subject">Description</label>
     </div>
     <div class="col-75">
-      <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+      <textarea id="description" name="description" placeholder="Write something.." style="height:200px"></textarea>
     </div>
   </div>
   <div class="row">

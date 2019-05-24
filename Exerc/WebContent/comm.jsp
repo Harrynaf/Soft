@@ -2,10 +2,16 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-
+<%!
+public static String checknull(String str) {
+    if(str != null && !str.isEmpty())
+        return str;
+    else{str="";
+    return str;}
+}
+%>
 <%
     session.setAttribute("commfeedtaskrefresh","");
-    String id = request.getParameter("userId");
 	String driverName = "com.mysql.jdbc.Driver";
 	String connectionUrl = "jdbc:mysql://localhost:8889/";
 	String dbName = "mysql_database";
@@ -158,7 +164,7 @@
 	try{	
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
-		String sql ="SELECT * FROM TaskDB where active = 1 and done = 0 and assignedto ='"+session.getAttribute("Name")+"'";
+		String sql ="SELECT * FROM TaskDB where active = 1 and multtype IS NOT NULL and done = 0 and assignedto = '"+session.getAttribute( "Name")+"' ";
 		resultSet = statement.executeQuery(sql);
 		while(resultSet.next()){
 	%>             
@@ -171,6 +177,62 @@
 			<td><%=resultSet.getString("payment") %></td>
 			<td><%=resultSet.getString("description") %></td>
 			<td><button type="submit" class="registerbtn">Message</button></td>
+		</tr>
+		</tbody>
+		
+		            
+	<%		
+		}
+		sql ="SELECT * FROM TaskDB where active1 = 1 and multtype IS NOT NULL and done = 0 and assignedto1 = '"+session.getAttribute( "Name")+"' ";
+		resultSet = statement.executeQuery(sql);
+		while(resultSet.next()){
+	%>             
+		    <tbody>
+		    <tr bgcolor="#cce6ff">
+		    <td><%=resultSet.getString("id") %></td>
+			<td><%=resultSet.getString("email") %></td>
+			<td><%=resultSet.getString("assignedto1") %></td>
+			<td><%=resultSet.getString("skillneed1") %></td>
+			<td><%=resultSet.getString("payment1") %></td>
+			<td><%=resultSet.getString("description") %></td>
+			<td><button type="submit" class="registerbtn">Message</button></td>
+		</tr>
+		</tbody>
+		
+		            
+	<%		
+		}
+		sql ="SELECT * FROM TaskDB where active2 = 1 and multtype IS NOT NULL and done = 0 and assignedto2 = '"+session.getAttribute( "Name")+"' ";
+		resultSet = statement.executeQuery(sql);
+		while(resultSet.next()){
+	%>             
+		    <tbody>
+		    <tr bgcolor="#cce6ff">
+		    <td><%=resultSet.getString("id") %></td>
+			<td><%=resultSet.getString("email") %></td>
+			<td><%=resultSet.getString("assignedto2") %></td>
+			<td><%=resultSet.getString("skillneed2") %></td>
+			<td><%=resultSet.getString("payment2") %></td>
+			<td><%=resultSet.getString("description") %></td>
+			<td><button type="submit" class="registerbtn">Message</button></td>
+		</tr>
+		</tbody>
+		
+		            
+	<%		
+		}
+		sql ="SELECT * FROM TaskDB where (active = 1 OR active1 = 1 OR active2 = 1) and multtype IS NOT NULL and done = 0 and (assignedto = '"+session.getAttribute( "Name")+"' OR assignedto1 = '"+session.getAttribute( "Name")+"' OR assignedto2 = '"+session.getAttribute( "Name")+"')";
+		resultSet = statement.executeQuery(sql);
+		while(resultSet.next()){
+	%>             
+		    <tbody>
+		    <tr bgcolor="#cce6ff">
+		    <td><%=resultSet.getString("id") %></td>
+			<td><%=resultSet.getString("email") %></td>
+			<td>(<%=checknull(resultSet.getString("assignedto"))%>)<br/>(<%=checknull(resultSet.getString("assignedto1"))%>) <br/>(<%=checknull(resultSet.getString("assignedto2"))%>)</td>
+			<td>(<%=checknull(resultSet.getString("skillneed"))%>)<br/>(<%=checknull(resultSet.getString("skillneed1"))%>) <br/>(<%=checknull(resultSet.getString("skillneed2"))%>)</td>
+			<td>(<%=checknull(resultSet.getString("payment"))%>)<br/>(<%=checknull(resultSet.getString("payment1"))%>) <br/>(<%=checknull(resultSet.getString("payment2"))%>)</td>
+			<td><%=resultSet.getString("description") %></td>
 		</tr>
 		</tbody>
 		

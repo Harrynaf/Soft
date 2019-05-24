@@ -8,8 +8,8 @@
 <body>
     <div id="container">
         <div id="center">
-           <a href="search.jsp">search by title</a>
-           <a href="hot.jsp">HOT</a>
+           <a href="search.jsp">Search by title</a>
+           <a href="hot.jsp">List</a>
         </div>
         </div>
 </body>

@@ -5,7 +5,6 @@
 
 <%
 
-    String id = request.getParameter("userId");
 	String driverName = "com.mysql.jdbc.Driver";
 	String connectionUrl = "jdbc:mysql://localhost:8889/";
 	String dbName = "mysql_database";
@@ -35,6 +34,7 @@
         <h2 align="center"><font><strong>Search Results</strong></font></h2>
         <form action="applysuccess.jsp" method="post">
             <input type = "hidden" name="taskid" id="taskid">
+            <input type = "hidden" name="skillneed" id="skillneed">
   <div id="tbody">
 <table class="table" align="center" cellpadding="5" cellspacing="5" border="1">
 <thead>
@@ -71,7 +71,42 @@
 		            
 	<%		
 		}
+		String sql1 ="SELECT * FROM TaskDB WHERE active1 = 0 and done = 0 and skillneed1 like '"+task+"' and email != '"+session.getAttribute("Name")+"' ";
+		resultSet = statement.executeQuery(sql1);
+		while(resultSet.next()){
+	%>             
+		    <tbody>
+		    <tr bgcolor="#cce6ff">
+		    <td><%=resultSet.getString("id") %></td>
+			<td><%=resultSet.getString("email") %></td>
+			<td><%=resultSet.getString("skillneed1") %></td>
+			<td><%=resultSet.getString("payment1") %></td>
+			<td><%=resultSet.getString("description") %></td>
+			<td><button type="submit" class="registerbtn">Apply</button></td>
+		</tr>
+		</tbody>
 		
+		            
+	<%		
+		}
+		String sql2 ="SELECT * FROM TaskDB WHERE active1 = 0 and done = 0 and skillneed2 like '"+task+"' and email != '"+session.getAttribute("Name")+"' ";
+		resultSet = statement.executeQuery(sql2);
+		while(resultSet.next()){
+	%>             
+		    <tbody>
+		    <tr bgcolor="#cce6ff">
+		    <td><%=resultSet.getString("id") %></td>
+			<td><%=resultSet.getString("email") %></td>
+			<td><%=resultSet.getString("skillneed2") %></td>
+			<td><%=resultSet.getString("payment2") %></td>
+			<td><%=resultSet.getString("description") %></td>
+			<td><button type="submit" class="registerbtn">Apply</button></td>
+		</tr>
+		</tbody>
+		
+		            
+	<%		
+		}
 	} catch (Exception e) {
 		e.printStackTrace();
 	}%>
@@ -80,8 +115,10 @@
     $('.table tbody').on('click','.registerbtn',function(){
         var currow = $(this).closest('tr');
         var col1 = currow.find('td:eq(0)').html();
+        var col3 = currow.find('td:eq(2)').html();
         var result = col1;
         document.getElementById("taskid").value = result;
+        document.getElementById("skillneed").value = col3;
     })
     </script>
 </table>

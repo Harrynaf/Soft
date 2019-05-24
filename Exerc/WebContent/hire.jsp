@@ -22,6 +22,7 @@
 	ResultSet resultSet = null;
 	String[] parts = new String[50];
 	session.setAttribute("taskforhire",request.getParameter("taskid"));
+	session.setAttribute("candidateskill",request.getParameter("candidateskill"));
 %>
 <html> 
 <head> 
@@ -44,6 +45,7 @@
 
 	<tr bgcolor="#3399ff">
 	    <td><b>Candidate</b></td>
+	    <td><b>For skill</b></td>
 	    <td><b>CandidateEmail</b></td>
 		<td><b>Rating</b></td>
 		<td><b>Date of birth</b></td>
@@ -57,9 +59,15 @@
 	try{	
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
-		String sql ="SELECT * FROM TaskDB where id= '"+request.getParameter("taskid")+"'";
+		String sql ="SELECT * FROM TaskDB where id= '"+request.getParameter("taskid")+"' and skillneed= '"+request.getParameter("candidateskill")+"' ";
 		resultSet = statement.executeQuery(sql);
 		while(resultSet.next()){parts = resultSet.getString("candidates").split("%");}
+		String sql1 ="SELECT * FROM TaskDB where id= '"+request.getParameter("taskid")+"' and skillneed1= '"+request.getParameter("candidateskill")+"' ";
+		resultSet = statement.executeQuery(sql1);
+		while(resultSet.next()){parts = resultSet.getString("candidates1").split("%");}
+		String sql2 ="SELECT * FROM TaskDB where id= '"+request.getParameter("taskid")+"' and skillneed2= '"+request.getParameter("candidateskill")+"' ";
+		resultSet = statement.executeQuery(sql2);
+		while(resultSet.next()){parts = resultSet.getString("candidates2").split("%");}
 		
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -78,6 +86,7 @@
 		    <tbody>
 		    <tr bgcolor="#cce6ff">
 		    <td><%=resultSet.getString("nick") %></td>
+		    <td><%=request.getParameter("candidateskill") %></td>
 		    <td><%=resultSet.getString("email") %></td>
 			<td><%=resultSet.getString("rating") %><img src="star.png" alt="Star" height="42" width="42"></td>
 			<td><%=resultSet.getString("dot") %></td>
@@ -99,8 +108,8 @@
     <script>
     $('.table tbody').on('click','.registerbtn',function(){
         var currow = $(this).closest('tr');
-        var col2 = currow.find('td:eq(1)').html();
-        var result = col2;
+        var col3 = currow.find('td:eq(2)').html();
+        var result = col3;
         document.getElementById("candidate").value = result;
         System.out.println(<%=request.getParameter("taskid")%>);
         document.getElementById("taskid").value = <%=request.getParameter("taskid")%>;

@@ -6,7 +6,6 @@
 
 <%
 
-    String id = request.getParameter("userId");
 	String driverName = "com.mysql.jdbc.Driver";
 	String connectionUrl = "jdbc:mysql://localhost:8889/";
 	String dbName = "mysql_database";
@@ -46,7 +45,7 @@
 		<td><b>Nickname</b></td>
 		<td><b>Date of Birth</b></td>
 		<td><b>Country</b></td>
-		<td><b>Skills</b></td>
+		<td><b>Skills & Past experience</b></td>
 		<td><b>Rating</b></td>
 	</tr>
    <%

@@ -5,7 +5,6 @@
 <%@page import ="java.sql.PreparedStatement"%>
 
 <%
-    String id = request.getParameter("userId");
 	String driverName = "com.mysql.jdbc.Driver";
 	String connectionUrl = "jdbc:mysql://localhost:8889/";
 	String dbName = "mysql_database";
@@ -25,8 +24,14 @@
 	try{	
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
-		String sql ="UPDATE TaskDB SET assignedto = '"+request.getParameter("candidate")+"' , active = 1 WHERE id = '"+session.getAttribute("taskforhire")+"' ";
+		String sql ="UPDATE TaskDB SET assignedto = '"+request.getParameter("candidate")+"' , active = 1 WHERE id = '"+session.getAttribute("taskforhire")+"' and skillneed= '"+session.getAttribute("candidateskill")+"' ";
 		ps = connection.prepareStatement(sql);
+		ps.executeUpdate();
+		String sql1 ="UPDATE TaskDB SET assignedto1 = '"+request.getParameter("candidate")+"' , active1 = 1 WHERE id = '"+session.getAttribute("taskforhire")+"' and skillneed1= '"+session.getAttribute("candidateskill")+"' ";
+		ps = connection.prepareStatement(sql1);
+		ps.executeUpdate();
+		String sql2 ="UPDATE TaskDB SET assignedto2 = '"+request.getParameter("candidate")+"' , active2 = 1 WHERE id = '"+session.getAttribute("taskforhire")+"' and skillneed2= '"+session.getAttribute("candidateskill")+"' ";
+		ps = connection.prepareStatement(sql2);
 		ps.executeUpdate();
 	} catch (Exception e) {
 		e.printStackTrace();

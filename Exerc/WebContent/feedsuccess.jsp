@@ -7,7 +7,6 @@
 <%@page import ="java.sql.PreparedStatement"%>
 
 <%
-    String id = request.getParameter("userId");
 	String driverName = "com.mysql.jdbc.Driver";
 	String connectionUrl = "jdbc:mysql://localhost:8889/";
 	String dbName = "mysql_database";
@@ -30,7 +29,7 @@
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
 		if (session.getAttribute("Name").equals(session.getAttribute("checkemp")))
-		{String sql ="UPDATE TaskDB SET feedback = concat(COALESCE(feedback, 'CHAR(13)'), 'Employer gave feedback:"+request.getParameter("feedback")+"\n'),feedbackedbyemployer = 1 WHERE id='"+session.getAttribute("commfeedtask")+"' ;";
+		{String sql ="UPDATE TaskDB SET feedback = concat(COALESCE(feedback, 'CHAR(13)'), 'Employer "+session.getAttribute("Name")+" gave feedback:"+request.getParameter("feedback")+"\n'),feedbackedbyemployer = 1 WHERE id='"+session.getAttribute("commfeedtask")+"' ;";
 		ps = connection.prepareStatement(sql);
 		ps.executeUpdate();
 		String sql1 ="UPDATE UserDB SET ratingscount = ratingscount + 1 , rating = rating + '"+request.getParameter("rating")+"' WHERE email='"+session.getAttribute("col3")+"' ;";
@@ -44,7 +43,13 @@
 		ps2 = connection.prepareStatement(sql3);
 		ps2.executeUpdate();
 		}
-		else{String sql ="UPDATE TaskDB SET feedback = concat(COALESCE(feedback, 'CHAR(13)'), 'Employee gave feedback:"+request.getParameter("feedback")+"\n'),feedbacked = 1 WHERE id='"+session.getAttribute("commfeedtask")+"' ;";
+		else{String sql ="UPDATE TaskDB SET feedback = concat(COALESCE(feedback, 'CHAR(13)'), 'Employee "+session.getAttribute("col3")+" gave feedback:"+request.getParameter("feedback")+"\n'),feedbacked = 1 WHERE id='"+session.getAttribute("commfeedtask")+"' AND assignedto='"+session.getAttribute("col3")+"';";
+		ps = connection.prepareStatement(sql);
+		ps.executeUpdate();
+		sql ="UPDATE TaskDB SET feedback = concat(COALESCE(feedback, 'CHAR(13)'), 'Employee "+session.getAttribute("col3")+" gave feedback:"+request.getParameter("feedback")+"\n'),feedbacked1 = 1 WHERE id='"+session.getAttribute("commfeedtask")+"' AND assignedto1='"+session.getAttribute("col3")+"';";
+		ps = connection.prepareStatement(sql);
+		ps.executeUpdate();
+		sql ="UPDATE TaskDB SET feedback = concat(COALESCE(feedback, 'CHAR(13)'), 'Employee "+session.getAttribute("col3")+" gave feedback:"+request.getParameter("feedback")+"\n'),feedbacked2 = 1 WHERE id='"+session.getAttribute("commfeedtask")+"' AND assignedto2='"+session.getAttribute("col3")+"';";
 		ps = connection.prepareStatement(sql);
 		ps.executeUpdate();
 		String sql1 ="UPDATE UserDB SET ratingscount = ratingscount + 1 , rating = rating + '"+request.getParameter("rating")+"' WHERE email='"+session.getAttribute("checkemp")+"' ;";

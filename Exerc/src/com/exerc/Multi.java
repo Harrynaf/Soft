@@ -16,6 +16,8 @@ public class Multi implements Serializable {
 	private String payment1;
 	private String payment2;
 	private String description;
+	private Boolean remote;
+	private int multtype;
 	public String getemail() {
 		return email;
 	}
@@ -46,7 +48,7 @@ public class Multi implements Serializable {
 	public void setpayment1(String payment1) {
 		this.payment1 = payment1;
 	}
-	public String getpaymen2t() {
+	public String getpayment2() {
 		return payment2;
 	}
 	public void setpayment2(String payment2) {
@@ -63,5 +65,17 @@ public class Multi implements Serializable {
 	}
 	public void setdescription(String description) {
 		this.description = description;
+    }
+	public Boolean getremote() {
+		return remote;
+	}
+	public void setremote(Boolean remote) {
+		this.remote = remote;
+    }
+	public Integer getmulttype() {
+		return multtype;
+	}
+	public void setmulttype(Integer multtype) {
+		this.multtype = multtype;
     }
 }

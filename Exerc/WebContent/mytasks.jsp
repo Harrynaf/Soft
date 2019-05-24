@@ -4,9 +4,16 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.PreparedStatement"%>
 
-<%
+<%!
+public static String checknull(String str) {
+    if(str != null && !str.isEmpty())
+        return str;
+    else{str="";
+    return str;}
+}
+%>
 
-    String id = request.getParameter("userId");
+<%
 	String driverName = "com.mysql.jdbc.Driver";
 	String connectionUrl = "jdbc:mysql://localhost:8889/";
 	String dbName = "mysql_database";
@@ -22,6 +29,7 @@
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet resultSet = null;
+	
 %>
 <html> 
 <head> 
@@ -39,6 +47,7 @@
     <div id="container">
        <form action="hire.jsp" method="post">
        <input type = "hidden" name="taskid" id="taskid">
+       <input type = "hidden" name="candidateskill" id="candidateskill">
   <ul class="nav nav-tabs" id="myTab">
     <li class="active"><a data-toggle="tab" href="#home">My tasks</a></li>
     <li><a data-toggle="tab" href="#menu1">My posted tasks</a></li>
@@ -53,19 +62,18 @@
 	<tr bgcolor="#3399ff">
 	    <td><b>Task No</b></td>
 		<td><b>Employer's Email</b></td>
-		<td><b>Skill</b></td>
 		<td><b>Payment in euro</b></td>
 		<td><b>Description</b></td>
 		<td><b>Upload Remote Task</b></td>
 	</tr>
 	</thead>
-	<tr style="background-color:gold;"><td><b>Ongoing</b></td><td></td><td></td><td></td><td></td><td></td></tr>
-	<tr style="background-color:#4CF5B3;"><td><b>Remote Tasks</b></td><td></td><td></td><td></td><td></td><td></td></tr>
+	<tr style="background-color:gold;"><td><b>Ongoing</b></td><td></td><td></td><td></td><td></td></tr>
+	<tr style="background-color:#4CF5B3;"><td><b>Remote Tasks</b></td><td></td><td></td><td></td><td></td></tr>
    <%
 	try{	
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
-		String sql ="SELECT * FROM TaskDB WHERE assignedto = '"+session.getAttribute( "Name")+"' and done = 0 and remote = 1";
+		String sql ="SELECT * FROM TaskDB WHERE (assignedto = '"+session.getAttribute( "Name")+"' OR assignedto1 = '"+session.getAttribute( "Name")+"' OR assignedto2 = '"+session.getAttribute( "Name")+"') and done = 0 and remote = 1";
 		resultSet = statement.executeQuery(sql);
 		while(resultSet.next()){
 	%>             
@@ -73,7 +81,6 @@
 		    <tr bgcolor="#cce6ff">
 		    <td><%=resultSet.getString("id") %></td>
 			<td><%=resultSet.getString("email") %></td>
-			<td><%=resultSet.getString("skillneed") %></td>
 			<td><%=resultSet.getString("payment") %></td>
 			<td><%=resultSet.getString("description") %></td>
 			<td><button type="submit" class="registerbtn"  formaction="upload.jsp">Upload Task</button></td>		</tr>
@@ -86,12 +93,12 @@
 	} catch (Exception e) {
 		e.printStackTrace();
 	}%>
-	<tr style="background-color:#4CF5B3;"><td><b>Non-Remote Tasks</b></td><td></td><td></td><td></td><td></td><td></td></tr>
+	<tr style="background-color:#4CF5B3;"><td><b>Non-Remote Tasks</b></td><td></td><td></td><td></td><td></td></tr>
    <%
 	try{	
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
-		String sql ="SELECT * FROM TaskDB WHERE assignedto = '"+session.getAttribute( "Name")+"' and done = 0 and remote = 0";
+		String sql ="SELECT * FROM TaskDB WHERE (assignedto = '"+session.getAttribute( "Name")+"' OR assignedto1 = '"+session.getAttribute( "Name")+"' OR assignedto2 = '"+session.getAttribute( "Name")+"') and done = 0 and remote = 0";
 		resultSet = statement.executeQuery(sql);
 		while(resultSet.next()){
 	%>             
@@ -99,7 +106,6 @@
 		    <tr bgcolor="#cce6ff">
 		    <td><%=resultSet.getString("id") %></td>
 			<td><%=resultSet.getString("email") %></td>
-			<td><%=resultSet.getString("skillneed") %></td>
 			<td><%=resultSet.getString("payment") %></td>
 			<td><%=resultSet.getString("description") %></td>
 		</tr>
@@ -112,12 +118,12 @@
 	} catch (Exception e) {
 		e.printStackTrace();
 	}%>
-		<tr style="background-color:gold;"><td><b>Completed</b></td><td></td><td></td><td></td><td></td></tr>
+		<tr style="background-color:gold;"><td><b>Completed</b></td><td></td><td></td><td></td></tr>
    <%
 	try{	
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
-		String sql ="SELECT * FROM TaskDB WHERE assignedto = '"+session.getAttribute( "Name")+"'  and done = 1";
+		String sql ="SELECT * FROM TaskDB WHERE (assignedto = '"+session.getAttribute( "Name")+"' OR assignedto1 = '"+session.getAttribute( "Name")+"' OR assignedto2 = '"+session.getAttribute( "Name")+"')  and done = 1";
 		resultSet = statement.executeQuery(sql);
 		while(resultSet.next()){
 	%>             
@@ -125,7 +131,6 @@
 		    <tr bgcolor="#cce6ff">
 		    <td><%=resultSet.getString("id") %></td>
 			<td><%=resultSet.getString("email") %></td>
-			<td><%=resultSet.getString("skillneed") %></td>
 			<td><%=resultSet.getString("payment") %></td>
 			<td><%=resultSet.getString("description") %></td>
 		</tr>
@@ -161,7 +166,7 @@
 	try{	
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
-		String sql ="SELECT * FROM TaskDB where active = 0 and done = 0 and email='"+session.getAttribute( "Name" )+"'";
+		String sql ="SELECT * FROM TaskDB where active = 0 and done = 0 and email='"+session.getAttribute( "Name" )+"' and skillneed IS NOT NULL ";
 		resultSet = statement.executeQuery(sql);
 		while(resultSet.next()){
 	%>             
@@ -179,7 +184,42 @@
 		            
 	<%		
 		}
+		String sql1 ="SELECT * FROM TaskDB where active1 = 0 and done = 0 and email='"+session.getAttribute( "Name" )+"' and skillneed1 IS NOT NULL ";
+		resultSet = statement.executeQuery(sql1);
+		while(resultSet.next()){
+	%>             
+		    <tbody>
+		    <tr bgcolor="#cce6ff">
+		    <td><%=resultSet.getString("id") %></td>
+		    <td></td>
+			<td><%=resultSet.getString("skillneed1") %></td>
+			<td><%=resultSet.getString("payment1") %></td>
+			<td><%=resultSet.getString("description") %></td>
+			<td><button type="submit" class="registerbtn">Hire someone</button></td>
+		</tr>
+		</tbody>
 		
+		            
+	<%		
+		}
+		String sql2 ="SELECT * FROM TaskDB where active2 = 0 and done = 0 and email='"+session.getAttribute( "Name" )+"' and skillneed2 IS NOT NULL ";
+		resultSet = statement.executeQuery(sql2);
+		while(resultSet.next()){
+	%>             
+		    <tbody>
+		    <tr bgcolor="#cce6ff">
+		    <td><%=resultSet.getString("id") %></td>
+		    <td></td>
+			<td><%=resultSet.getString("skillneed2") %></td>
+			<td><%=resultSet.getString("payment2") %></td>
+			<td><%=resultSet.getString("description") %></td>
+			<td><button type="submit" class="registerbtn">Hire someone</button></td>
+		</tr>
+		</tbody>
+		
+		            
+	<%		
+		}
 	} catch (Exception e) {
 		e.printStackTrace();
 	}%>
@@ -188,7 +228,7 @@
 	try{	
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
-		String sql ="SELECT * FROM TaskDB where active = 1 and done = 0 and email='"+session.getAttribute( "Name" )+"'";
+		String sql ="SELECT * FROM TaskDB where active = 1 and active1 = 0 and active2 = 0 and done = 0 and email='"+session.getAttribute( "Name" )+"'";
 		resultSet = statement.executeQuery(sql);
 		while(resultSet.next()){
 	%>             
@@ -196,8 +236,26 @@
 		    <tr bgcolor="#cce6ff">
 		    <td><%=resultSet.getString("id") %></td>
 		    <td><%=resultSet.getString("assignedto") %></td>
-			<td><%=resultSet.getString("skillneed") %></td>
+		    <td><%=resultSet.getString("skillneed") %></td>
 			<td><%=resultSet.getString("payment") %></td>
+			<td><%=resultSet.getString("description") %></td>
+			<td><button type="submit" class="registerbtn" formaction="done.jsp">Pay & Check as done</button></td>
+		</tr>
+		</tbody>
+		
+		            
+	<%		
+		}
+		String sql1 ="SELECT * FROM TaskDB where (active = 1 AND active1 = 1 AND active2 = 1) and done = 0 and email='"+session.getAttribute( "Name" )+"'";
+		resultSet = statement.executeQuery(sql1);
+		while(resultSet.next()){
+	%>             
+		    <tbody>
+		    <tr bgcolor="#cce6ff">
+		    <td><%=resultSet.getString("id") %></td>
+		    <td>(<%=checknull(resultSet.getString("assignedto"))%>)<br/>(<%=checknull(resultSet.getString("assignedto1"))%>) <br/>(<%=checknull(resultSet.getString("assignedto2"))%>)</td>
+			<td>(<%=checknull(resultSet.getString("skillneed"))%>)<br/>(<%=checknull(resultSet.getString("skillneed1"))%>) <br/>(<%=checknull(resultSet.getString("skillneed2"))%>)</td>
+			<td>(<%=checknull(resultSet.getString("payment"))%>)<br/>(<%=checknull(resultSet.getString("payment1"))%>) <br/>(<%=checknull(resultSet.getString("payment2"))%>)</td>
 			<td><%=resultSet.getString("description") %></td>
 			<td><button type="submit" class="registerbtn" formaction="done.jsp">Pay & Check as done</button></td>
 		</tr>
@@ -215,7 +273,7 @@
 	try{	
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
-		String sql ="SELECT * FROM TaskDB where done = 1 and email='"+session.getAttribute( "Name" )+"'";
+		String sql ="SELECT * FROM TaskDB where done = 1 and active1 = 0 and active2 = 0 and email='"+session.getAttribute( "Name" )+"'";
 		resultSet = statement.executeQuery(sql);
 		while(resultSet.next()){
 	%>             
@@ -223,8 +281,25 @@
 		    <tr bgcolor="#cce6ff">
 		    <td><%=resultSet.getString("id") %></td>
 		    <td><%=resultSet.getString("assignedto") %></td>
-			<td><%=resultSet.getString("skillneed") %></td>
+		    <td><%=resultSet.getString("skillneed") %></td>
 			<td><%=resultSet.getString("payment") %></td>
+			<td><%=resultSet.getString("description") %></td>
+		</tr>
+		</tbody>
+		
+		            
+	<%		
+		}
+		String sql1 ="SELECT * FROM TaskDB where done = 1 and active1 = 1 and active2 = 1 and email='"+session.getAttribute( "Name" )+"'";
+		resultSet = statement.executeQuery(sql1);
+		while(resultSet.next()){
+	%>             
+		    <tbody>
+		    <tr bgcolor="#cce6ff">
+		    <td><%=resultSet.getString("id") %></td>
+		    <td>(<%=checknull(resultSet.getString("assignedto"))%>)<br/>(<%=checknull(resultSet.getString("assignedto1"))%>) <br/>(<%=checknull(resultSet.getString("assignedto2"))%>)</td>
+			<td>(<%=checknull(resultSet.getString("skillneed"))%>)<br/>(<%=checknull(resultSet.getString("skillneed1"))%>) <br/>(<%=checknull(resultSet.getString("skillneed2"))%>)</td>
+			<td>(<%=checknull(resultSet.getString("payment"))%>)<br/>(<%=checknull(resultSet.getString("payment1"))%>) <br/>(<%=checknull(resultSet.getString("payment2"))%>)</td>
 			<td><%=resultSet.getString("description") %></td>
 		</tr>
 		</tbody>
@@ -247,7 +322,9 @@
     $('.table tbody').on('click','.registerbtn',function(){
         var currow = $(this).closest('tr');
         var col1 = currow.find('td:eq(0)').html();
+        var col3 = currow.find('td:eq(2)').html();
         var result = col1;
+        document.getElementById("candidateskill").value = col3;
         document.getElementById("taskid").value = result;
     })
     </script>

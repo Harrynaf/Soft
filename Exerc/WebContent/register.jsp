@@ -29,8 +29,8 @@
     <label for="country"><b>Country</b></label>
     <input type="text" placeholder="Country" name="country" required>
       
-    <label for="skill"><b>Skills</b></label>
-    <input type="text" placeholder="skills1,skill2,..." name="skill" required>
+    <label for="skill"><b>Skills & Past experience</b></label>
+    <input type="text" placeholder="e.g. Civil Engineering degree from University of Plymouth,experienced computer programmer(my site's link)" name="skill" required>
       </ul>
     <hr>
     <button type="submit" class="registerbtn">Register</button>

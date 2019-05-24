@@ -6,9 +6,8 @@
 <%@page import="java.sql.Connection"%>
 <%@page import ="java.sql.PreparedStatement"%>
 
-<%
+<%  System.out.println(session.getAttribute("checkemp"));
     session.setAttribute("commfeedtaskrefresh",session.getAttribute("commfeedtask"));
-    String id = request.getParameter("userId");
 	String driverName = "com.mysql.jdbc.Driver";
 	String connectionUrl = "jdbc:mysql://localhost:8889/";
 	String dbName = "mysql_database";
@@ -29,10 +28,10 @@
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
 		if (session.getAttribute("Name").equals(session.getAttribute("checkemp")))
-		{String sql ="INSERT INTO CommDB (text,taskid) VALUES ((concat(COALESCE(text, ''), 'Employer Wrote:"+request.getParameter("message")+"')),'"+session.getAttribute("commfeedtask")+"') ;";
+		{String sql ="INSERT INTO CommDB (text,taskid) VALUES ((concat(COALESCE(text, ''), 'Employer "+session.getAttribute("Name")+" Wrote:"+request.getParameter("message")+"')),'"+session.getAttribute("commfeedtask")+"') ;";
 		ps = connection.prepareStatement(sql);
 		ps.executeUpdate();}
-		else{String sql ="INSERT INTO CommDB (text,taskid) VALUES ((concat(COALESCE(text, ''), 'Employee Wrote:"+request.getParameter("message")+"')),'"+session.getAttribute("commfeedtask")+"') ;";
+		else{String sql ="INSERT INTO CommDB (text,taskid) VALUES ((concat(COALESCE(text, ''), 'Employee "+session.getAttribute("Name")+" Wrote:"+request.getParameter("message")+"')),'"+session.getAttribute("commfeedtask")+"') ;";
 		ps = connection.prepareStatement(sql);
 		ps.executeUpdate();}
 	} catch (Exception e) {

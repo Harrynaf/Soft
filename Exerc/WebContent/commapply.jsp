@@ -2,11 +2,18 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<%session.setAttribute("commfeedtask",request.getParameter("taskid"));
- session.setAttribute("checkemp",request.getParameter("checkemp"));
+<%
+if(request.getParameter("taskid") != null && !request.getParameter("taskid").isEmpty())
+{session.setAttribute("commfeedtask",request.getParameter("taskid"));}
+else
+{session.setAttribute("commfeedtask",session.getAttribute("commfeedtaskrefresh"));}
+
+if(request.getParameter("checkemp") != null && !request.getParameter("checkemp").isEmpty())
+{session.setAttribute("checkemp",request.getParameter("checkemp"));}
+
  System.out.println(request.getParameter("taskid"));
  System.out.println(request.getParameter("checkemp"));
- String id = request.getParameter("userId");
+ System.out.println(session.getAttribute("commfeedtaskrefresh"));
 	String driverName = "com.mysql.jdbc.Driver";
 	String connectionUrl = "jdbc:mysql://localhost:8889/";
 	String dbName = "mysql_database";
@@ -33,7 +40,7 @@
     <div class="container">
     
       <div id="tbody">
-<table class="table" align="center" cellpadding="5" cellspacing="5" border="1" style="width:100%">
+<table class="table" align="center" cellpadding="5" cellspacing="5" border="1" style="width:100%;height:50px;">
 <thead>
 
 	<tr bgcolor="#3399ff">

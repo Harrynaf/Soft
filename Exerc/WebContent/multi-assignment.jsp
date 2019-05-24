@@ -10,13 +10,21 @@
 <h1 style="color:white;">Multi-Assignment</h1>
 <body>
     <div class="container">
-  <form action="/action_page.php">
+  <form action="multidetails.jsp">
+  <input type = "hidden" name="email" id="email">
+  <input type = "hidden" name="remote" id="remote">
+  <input type = "hidden" name="multtype" id="multtype">
+  <script> 
+  document.getElementById("email").value = "<%=session.getAttribute("Name")%>";
+  document.getElementById("remote").value = false;
+  document.getElementById("multtype").value = 0;
+			        </script>  
   <div class="row">
     <div class="col-25">
       <label for="fname">Skill needed</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="firstname" placeholder="i.e. electrician">
+      <input type="text" id="skillneed" name="skillneed" placeholder="i.e. electrician">
     </div>
   </div>
   <div class="row">
@@ -24,7 +32,7 @@
       <label for="fname">Payment</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="firstname" placeholder="in euro">
+      <input type="text" id="payment" name="payment" placeholder="in euro">
     </div>
   </div>
   <div class="row">
@@ -32,7 +40,7 @@
       <label for="fname">Skill needed</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="firstname" placeholder="i.e. construction worker">
+      <input type="text" id="skillneed1" name="skillneed1" placeholder="i.e. construction worker">
     </div>
   </div>
   <div class="row">
@@ -40,7 +48,7 @@
       <label for="fname">Payment</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="firstname" placeholder="in euro">
+      <input type="text" id="payment1" name="payment1" placeholder="in euro">
     </div>
   </div>
   <div class="row">
@@ -48,7 +56,7 @@
       <label for="fname">Skill needed</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="firstname" placeholder="i.e. engineer">
+      <input type="text" id="skillneed2" name="skillneed2" placeholder="i.e. engineer">
     </div>
   </div>
   <div class="row">
@@ -56,7 +64,7 @@
       <label for="fname">Payment</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="firstname" placeholder="in euro">
+      <input type="text" id="payment2" name="payment2" placeholder="in euro">
     </div>
   </div>
   <div class="row">
@@ -64,13 +72,27 @@
       <label for="subject">Description</label>
     </div>
     <div class="col-75">
-      <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+      <textarea id="description" name="description" placeholder="Write something.." style="height:200px"></textarea>
     </div>
   </div>
   <div class="row">
+  <input type="checkbox"> Is it a remote job.
     <input type="submit" value="Submit">
   </div>
   </form>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+        $('input[type="checkbox"]').click(function(){
+            if($(this).prop("checked") == true){
+            	document.getElementById("remote").value = true;
+            }
+            else if($(this).prop("checked") == false){
+            	document.getElementById("remote").value = false;
+            }
+        });
+    });
+</script>
    <a style="font-size=10px;background-color:red;">HOT PICKS</a> <br></br>
         <a href="multi-assignment2.jsp" style="text-decoration:none;color:black;background-color: gold;font-size: 50px;">Construction</a>
         <a href="multi-assignment1.jsp" style="text-decoration:none;color:black;background-color: gold;font-size: 50px;">House renovation</a>

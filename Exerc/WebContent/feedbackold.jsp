@@ -74,6 +74,38 @@
 		            
 	<%		
 		}
+		sql ="SELECT * FROM TaskDB WHERE assignedto1 = '"+session.getAttribute( "Name")+"' AND feedback IS NOT NULL";
+		resultSet = statement.executeQuery(sql);
+		while(resultSet.next()){
+	%>
+		<tr bgcolor="#cce6ff">
+			
+			<td><%=resultSet.getString("id") %></td>
+			<td><%=resultSet.getString("skillneed1") %></td>
+			<td><%=resultSet.getString("payment1") %></td>
+			<td><%=resultSet.getString("description") %></td>
+			<td><%=resultSet.getString("feedback") %></td>
+			
+		</tr>
+		            
+	<%		
+		}
+		sql ="SELECT * FROM TaskDB WHERE assignedto2 = '"+session.getAttribute( "Name")+"' AND feedback IS NOT NULL";
+		resultSet = statement.executeQuery(sql);
+		while(resultSet.next()){
+	%>
+		<tr bgcolor="#cce6ff">
+			
+			<td><%=resultSet.getString("id") %></td>
+			<td><%=resultSet.getString("skillneed2") %></td>
+			<td><%=resultSet.getString("payment2") %></td>
+			<td><%=resultSet.getString("description") %></td>
+			<td><%=resultSet.getString("feedback") %></td>
+			
+		</tr>
+		            
+	<%		
+		}
 		
 	} catch (Exception e) {
 		e.printStackTrace();

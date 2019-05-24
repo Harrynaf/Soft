@@ -51,6 +51,9 @@
              <a href="main.jsp">Find task/Post a task</a>
              <a href="mytasks.jsp">My tasks & Posted tasks</a>
             </div>
+            <div id="lower">
+             <a href="searchuser.jsp">Search User Profile</a>
+            </div>
         </div>
 </body>
 <footer class="page-footer font-small blue">

@@ -25,8 +25,14 @@
 	try{	
 		connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 		statement=connection.createStatement();
-		String sql ="UPDATE TaskDB SET candidates = concat(COALESCE(candidates, ''), '"+session.getAttribute("Name")+"%') WHERE id='"+request.getParameter("taskid")+"' ;";
+		String sql ="UPDATE TaskDB SET candidates = concat(COALESCE(candidates, ''), '"+session.getAttribute("Name")+"%') WHERE id='"+request.getParameter("taskid")+"' and skillneed='"+request.getParameter("skillneed")+"' ;";
 		ps = connection.prepareStatement(sql);
+		ps.executeUpdate();
+		String sql1 ="UPDATE TaskDB SET candidates1 = concat(COALESCE(candidates1, ''), '"+session.getAttribute("Name")+"%') WHERE id='"+request.getParameter("taskid")+"' and skillneed1='"+request.getParameter("skillneed")+"' ;";
+		ps = connection.prepareStatement(sql1);
+		ps.executeUpdate();
+		String sql2 ="UPDATE TaskDB SET candidates2 = concat(COALESCE(candidates2, ''), '"+session.getAttribute("Name")+"%') WHERE id='"+request.getParameter("taskid")+"' and skillneed2='"+request.getParameter("skillneed")+"' ;";
+		ps = connection.prepareStatement(sql2);
 		ps.executeUpdate();
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -42,8 +48,8 @@
 <body>
     <div id="container">
         <div id="center">
-           <h1>You succesfully applied for this task!</h1>
-           <h1>Task id= <%=request.getParameter("taskid") %></h1>
+           <h1>You succesfully applied for this task as a <%=request.getParameter("skillneed")%>!</h1>
+           <h1>Task id = <%=request.getParameter("taskid") %></h1>
         </div>
         <div id="lower">
              <a style="font-size:40px;" href="homepage.jsp">Go to my homepage</a>
